@@ -1,25 +1,27 @@
 package br.ufc.controller;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.ufc.dao.IComunidadeDAO;
+import br.ufc.dao.IUsuarioDAO;
+import br.ufc.dao.UsuarioDAOHib;
 import br.ufc.model.CategoriaEnum;
 import br.ufc.model.Comunidade;
+import br.ufc.model.Usuario;
 import br.ufc.util.AulaFileUtil;
 
 @Controller
@@ -28,6 +30,9 @@ public class ComunidadeController {
 
 	@Autowired
 	private IComunidadeDAO comunidadeDAO;
+
+	@Autowired
+	private IUsuarioDAO usuarioDAO;
 	
 	@Autowired
 	private ServletContext context;
@@ -50,14 +55,36 @@ public class ComunidadeController {
 			comunidade.setImagem(relativePath);
 		}
 		comunidadeDAO.inserir(comunidade);
-		return "comunidades/inserir_ok";
+		return "redirect:/listarComunidade";
 	}
 	
 	//LISTAR
-		@RequestMapping("/listarComunidade")
-		public String listarComunidade(Model model){
-			List<Comunidade> comunidades = comunidadeDAO.listar();
-			model.addAttribute("comunidades", comunidades);
-			return "comunidades/listar_comunidade";
-		}	
+	@RequestMapping("/listarComunidade")
+	public String listarComunidade(Model model){
+		List<Comunidade> comunidades = comunidadeDAO.listar();
+		model.addAttribute("comunidades", comunidades);
+		return "comunidades/listar_comunidade";
+	}
+	
+	@RequestMapping("/verComunidade/{idComunidade}")
+	public String verComunidade(Model model, @PathVariable(value="idComunidade") Long idComunidade, HttpSession session){
+		System.out.println(((Usuario)session.getAttribute("usuario_logado")).getId());
+		Usuario usuario =   usuarioDAO.recuperar(((Usuario)session.getAttribute("usuario_logado")).getId());
+		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
+		Boolean participando = comunidade.getUsuarios().contains(usuario);
+		model.addAttribute("comunidade", comunidade);
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("participando", participando);
+		return "comunidades/ver_comunidade";
+	}
+	
+	@RequestMapping("/participarComunidade/{idComunidade}")
+	public String participarComunidade(Model model, @PathVariable(value="idComunidade") Long idComunidade, HttpSession session){
+		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
+		Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+		comunidade.addUsuario(usuario);
+		comunidadeDAO.alterar(comunidade);
+		model.addAttribute("comunidade", comunidade);
+		return "redirect:/verComunidade/" + comunidade.getId();
+	}
 }

@@ -30,40 +30,24 @@
       </ul>
     </div>
 </nav>
-
-<table border="1">
-	<c:forEach var="comunidade" items="${comunidades}">
-		<tr>
-			<td><img src="${comunidade.imagem}" width="50"></img></td>
-			<td>${comunidade.id}</td>
-			<td>
-				<a href="<c:url value="/verComunidade/${comunidade.id}"/>">${comunidade.nome}</a>
-			</td>
-			<td>${comunidade.categoria}</td>
-			<td>
-				<a href="<c:url value="/alterarUsuarioFormulario?id=${usuario.id}" />">ALTERAR</a>
-			</td>			
-		</tr>
-	</c:forEach>	
-</table>
-
-<div class="row">
-
-      <div class="col s9">
-        <!-- Grey navigation panel -->
-		       
-                 
-      </div>
-
-      <div class="col s3">
-        <!-- Teal page content  -->
-        <label>Adicionar Comunidade</label> <a href="inserirComunidadeFormulario" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-      </div>
-
-</div>
-        
+   <h1>${comunidade.nome}</h1>
+   <c:choose>
+   		<c:when test="${participando == true}">
+   			<h3>Você está participando desta Comunidade</h3>
+   		</c:when>
+   		<c:when test="${participando == false}">
+   			<a href="<c:url value="/participarComunidade/${comunidade.id}" />">Participar</a>
+   		</c:when>
+   </c:choose>
    
-
-
+   <div class="row">
+	   <label>Participantes:</label>
+	   <ul>
+	   	<c:forEach var="usuario" items="${comunidade.usuarios}">
+	   		<li>${usuario.nome}</li>
+	   	</c:forEach>
+	   </ul>
+   </div>
+   
 </body>
 </html>

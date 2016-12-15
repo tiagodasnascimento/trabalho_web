@@ -16,8 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.sun.xml.internal.bind.api.impl.NameConverter.Standard;
-
 @Entity(name="USUARIO")
 public class Usuario {
 	
@@ -106,9 +104,11 @@ public class Usuario {
 	public List<Comunidade> getComunidades() {
 		return comunidades;
 	}
+	
 	public void setComunidades(List<Comunidade> comunidades) {
 		this.comunidades = comunidades;
 	}
+	
 	public Long getId() {
 		return id;
 	}

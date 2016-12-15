@@ -84,6 +84,10 @@ public class Comunidade {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	public void addUsuario(Usuario usuario) {
+		this.usuarios.add(usuario);
+	}
 	public Collection<Forum> getForuns() {
 		return foruns;
 	}
