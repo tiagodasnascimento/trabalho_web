@@ -49,5 +49,50 @@
 	   </ul>
    </div>
    
+   <div class="row">
+   <h2>Novo Forum</h2>
+    <form action='<c:url value="/adicionarForum/${comunidade.id}"></c:url>' method="post" enctype="multipart/form-data">
+         <div class="card white darken-1">
+             <div class="card-content black-text">
+                 <div class="row">
+                 	<div class="input-field col s12">
+                     	<label for="titulo">Título:</label>
+                     	<input id="titulo" name="titulo" type="text" class="validate">
+                     </div>
+                 </div>
+                 <div class="row">	
+                     <div class="input-field col s12">
+                         <label for="descricao">Descrição:</label>
+                         <input id="descricao" name="descricao" type="text" class="validate">
+                     </div>
+                 </div>
+             </div>
+             <div class="card-action right-align">
+                 <button class="waves-effect waves-red btn indigo darken-4"><i class="material-icons left"></i>Enviar</button>
+             </div>
+         </div>
+     </form>
+   </div>
+   
+   <div class="row">
+	   <label>Foruns:</label>
+	   <table border="1">
+	   		<thead>
+	   			<tr>
+	   				<th>Título</th>
+	   				<th>Descrição</th>
+	   			</tr>
+	   		</thead>
+	   		<tbody>
+   			   	<c:forEach var="forum" items="${comunidade.foruns}">
+   			   	<tr>
+			   		<td>${forum.titulo}</td>
+			   		<td>${forum.descricao}</td>
+			   	</tr>
+			   	</c:forEach>
+	   		</tbody>
+	   </table>
+   </div>
+   
 </body>
 </html>

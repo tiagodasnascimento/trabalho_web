@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.ufc.dao.IComunidadeDAO;
+import br.ufc.dao.IForumDAO;
 import br.ufc.dao.IUsuarioDAO;
-import br.ufc.dao.UsuarioDAOHib;
 import br.ufc.model.CategoriaEnum;
 import br.ufc.model.Comunidade;
+import br.ufc.model.Forum;
 import br.ufc.model.Usuario;
 import br.ufc.util.AulaFileUtil;
 
@@ -33,6 +34,9 @@ public class ComunidadeController {
 
 	@Autowired
 	private IUsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private IForumDAO forumDAO;
 	
 	@Autowired
 	private ServletContext context;
@@ -83,6 +87,17 @@ public class ComunidadeController {
 		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
 		Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
 		comunidade.addUsuario(usuario);
+		comunidadeDAO.alterar(comunidade);
+		model.addAttribute("comunidade", comunidade);
+		return "redirect:/verComunidade/" + comunidade.getId();
+	}
+	
+	@RequestMapping("/adicionarForum/{idComunidade}")
+	public String addForum(Model model, @PathVariable(value="idComunidade") Long idComunidade, Forum forum, HttpSession session){
+		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
+		forum.setComunidade(comunidade);
+		forumDAO.inserir(forum);
+		comunidade.addForum(forum);
 		comunidadeDAO.alterar(comunidade);
 		model.addAttribute("comunidade", comunidade);
 		return "redirect:/verComunidade/" + comunidade.getId();

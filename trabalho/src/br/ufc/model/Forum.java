@@ -19,8 +19,12 @@ public class Forum {
 	@Column(name="FORUM_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long forumId;
+	
 	@Column(name="TITULO")
 	private String titulo;
+
+	@Column(name="DESCRICAO")
+	private String descricao;
 	
 	/*MANY_TO_ONE*/
 	@ManyToOne(optional=false)
@@ -47,7 +51,23 @@ public class Forum {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	
-	
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public Comunidade getComunidade() {
+		return comunidade;
+	}
+	public void setComunidade(Comunidade comunidade) {
+		this.comunidade = comunidade;
+	}
+	public Collection<Mensagem> getMensagens() {
+		return mensagens;
+	}
+	public void setMensagens(Collection<Mensagem> mensagens) {
+		this.mensagens = mensagens;
+	}
 	
 }
