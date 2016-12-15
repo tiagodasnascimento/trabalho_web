@@ -35,6 +35,8 @@ public class Usuario {
 	private String login;
 	@Column(name="SENHA")
 	private String senha;
+	@Column(name="FOTO_PERFIL")
+	private String fotoPerfil;
 	
 	/*MANY-TO-MANY*/
 	@ManyToMany(mappedBy="usuarios", fetch=FetchType.LAZY)	
@@ -46,7 +48,13 @@ public class Usuario {
 	private Collection<Foto> fotos;
 	/*ONE_TO_MANY*/
 	
-	
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public String getNome() {
 		return nome;
@@ -108,16 +116,11 @@ public class Usuario {
 	public void setComunidades(List<Comunidade> comunidades) {
 		this.comunidades = comunidades;
 	}
-	
-	public Long getId() {
-		return id;
+	public String getFotoPerfil() {
+		return fotoPerfil;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setFotoPerfil(String fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
 	}
-	
-	
-	
-	
 
 }

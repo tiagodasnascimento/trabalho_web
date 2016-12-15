@@ -38,7 +38,7 @@
 		
 		<table border="1">
 				<tr>
-					<td><img width="50" height="50" src='<c:url value="/resources/images/${usuario_logado.login}.png" />' /> </td>
+					<td><img width="50" height="50" src='<c:url value="${usuario_logado.fotoPerfil}" />' /> </td>
 					<td><p class="flow-text">Bem-vindo, ${usuario_logado.nome}!</p></td>
 				</tr>
         </table>

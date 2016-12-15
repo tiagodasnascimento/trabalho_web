@@ -18,10 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.ufc.dao.IComunidadeDAO;
 import br.ufc.dao.IForumDAO;
+import br.ufc.dao.IMensagemDAO;
 import br.ufc.dao.IUsuarioDAO;
 import br.ufc.model.CategoriaEnum;
 import br.ufc.model.Comunidade;
 import br.ufc.model.Forum;
+import br.ufc.model.Mensagem;
 import br.ufc.model.Usuario;
 import br.ufc.util.AulaFileUtil;
 
@@ -37,6 +39,9 @@ public class ComunidadeController {
 	
 	@Autowired
 	private IForumDAO forumDAO;
+	
+	@Autowired
+	private IMensagemDAO mensagemDAO;
 	
 	@Autowired
 	private ServletContext context;
@@ -72,7 +77,6 @@ public class ComunidadeController {
 	
 	@RequestMapping("/verComunidade/{idComunidade}")
 	public String verComunidade(Model model, @PathVariable(value="idComunidade") Long idComunidade, HttpSession session){
-		System.out.println(((Usuario)session.getAttribute("usuario_logado")).getId());
 		Usuario usuario =   usuarioDAO.recuperar(((Usuario)session.getAttribute("usuario_logado")).getId());
 		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
 		Boolean participando = comunidade.getUsuarios().contains(usuario);
@@ -93,7 +97,7 @@ public class ComunidadeController {
 	}
 	
 	@RequestMapping("/adicionarForum/{idComunidade}")
-	public String addForum(Model model, @PathVariable(value="idComunidade") Long idComunidade, Forum forum, HttpSession session){
+	public String adicionarForum(Model model, @PathVariable(value="idComunidade") Long idComunidade, Forum forum, HttpSession session){
 		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
 		forum.setComunidade(comunidade);
 		forumDAO.inserir(forum);
@@ -101,5 +105,30 @@ public class ComunidadeController {
 		comunidadeDAO.alterar(comunidade);
 		model.addAttribute("comunidade", comunidade);
 		return "redirect:/verComunidade/" + comunidade.getId();
+	}
+	
+	@RequestMapping("/verForum/{idComunidade}/{idForum}")
+	public String verForum(Model model, @PathVariable(value="idComunidade") Long idComunidade, @PathVariable(value="idForum") Long idForum, HttpSession session){
+		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
+		Forum forum = forumDAO.recuperar(idForum);
+
+		model.addAttribute("comunidade", comunidade);
+		model.addAttribute("forum", forum);
+		return "comunidades/ver_forum";
+	}
+	
+	@RequestMapping("/adicionarMensagem/{idComunidade}/{idForum}")
+	public String adicionarForum(Model model, @PathVariable(value="idComunidade") Long idComunidade, @PathVariable(value="idForum") Long idForum, Mensagem mensagem ,HttpSession session){
+		Usuario usuario =   usuarioDAO.recuperar(((Usuario)session.getAttribute("usuario_logado")).getId());
+		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
+		Forum forum = forumDAO.recuperar(idForum);
+		mensagem.setUsuario(usuario);
+		mensagem.setForum(forum);		
+		mensagemDAO.inserir(mensagem);
+		forum.addMensagen(mensagem);
+		forumDAO.alterar(forum);
+		model.addAttribute("comunidade", comunidade);
+		model.addAttribute("forum", forum);
+		return "redirect:/verForum/" + comunidade.getId() + "/" + forum.getForumId();
 	}
 }

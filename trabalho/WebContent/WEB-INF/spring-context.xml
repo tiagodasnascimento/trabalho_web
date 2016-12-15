@@ -38,6 +38,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="comunidadeDAOHib" class="br.ufc.dao.ComunidadeDAOHib"/>
 	<bean id="amizadeDAOHib" class="br.ufc.dao.AmizadeDAOHib"/>
 	<bean id="forumDAOHib" class="br.ufc.dao.ForumDAOHib"/>
+	<bean id="mensagemDAOHib" class="br.ufc.dao.MensagemDAOHib"/>
 	
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

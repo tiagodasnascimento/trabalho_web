@@ -1,6 +1,6 @@
 package br.ufc.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +34,7 @@ public class Forum {
 	
 	/*ONE_TO_MANY*/
 	@OneToMany(mappedBy="forum", targetEntity=Mensagem.class, fetch=FetchType.EAGER)//tipo de busca
-	private Collection<Mensagem> mensagens;
+	private List<Mensagem> mensagens;
 	/*ONE_TO_MANY*/
 	
 	
@@ -63,11 +63,14 @@ public class Forum {
 	public void setComunidade(Comunidade comunidade) {
 		this.comunidade = comunidade;
 	}
-	public Collection<Mensagem> getMensagens() {
+	public List<Mensagem> getMensagens() {
 		return mensagens;
 	}
-	public void setMensagens(Collection<Mensagem> mensagens) {
+	public void setMensagens(List<Mensagem> mensagens) {
 		this.mensagens = mensagens;
+	}
+	public void addMensagen(Mensagem mensagem) {
+		this.mensagens.add(mensagem);
 	}
 	
 }

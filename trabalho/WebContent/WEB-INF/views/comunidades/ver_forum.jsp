@@ -4,7 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Listar Comunidade</title>
 
 	 <!-- Import Google Icon Font-->
@@ -30,40 +32,48 @@
       </ul>
     </div>
 </nav>
-   <h1>${comunidade.nome}</h1>
-   <c:choose>
-   		<c:when test="${participando == true}">
-   			<h3>Você está participando desta Comunidade</h3>
-   		</c:when>
-   		<c:when test="${participando == false}">
-   			<a href="<c:url value="/participarComunidade/${comunidade.id}" />">Participar</a>
-   		</c:when>
-   </c:choose>
+   <h1>${forum.titulo}</h1>
+   <h3>${forum.descricao}</h3>
+   
    
    <div class="row">
-	   <label>Participantes:</label>
-	   <ul>
-	   	<c:forEach var="usuario" items="${comunidade.usuarios}">
-	   		<li>${usuario.nome}</li>
-	   	</c:forEach>
-	   </ul>
+	   <label>Mensagens:</label>
+	   <table border="1">
+	   		<thead>
+	   			<tr>
+	   				<th>Foto</th>
+	   				<th>Título</th>
+	   			</tr>
+	   		</thead>
+	   		<tbody>
+   			   	<c:forEach var="mensagem" items="${forum.mensagens}">
+   			   	<tr>
+   			   		<td>
+   			   			<div>
+   			   				<center>
+	   			   			<img src='<c:url value="/${mensagem.usuario.fotoPerfil}"></c:url>' width="100"  />
+	   			   			</center>
+   			   			</div>
+   			   			<div>
+   			   				<label>${mensagem.usuario.nome} ${mensagem.usuario.sobrenome}</label>
+   			   			</div>
+   			   		</td>
+			   		<td>${mensagem.texto}</td>
+			   	</tr>
+			   	</c:forEach>
+	   		</tbody>
+	   </table>
    </div>
    
    <div class="row">
-   <h2>Novo Forum</h2>
-    <form action='<c:url value="/adicionarForum/${comunidade.id}"></c:url>' method="post" enctype="multipart/form-data">
+   <h2>Nova Mensagem</h2>
+    <form action='<c:url value="/adicionarMensagem/${comunidade.id}/${forum.forumId}"></c:url>' method="post" enctype="multipart/form-data">
          <div class="card white darken-1">
              <div class="card-content black-text">
                  <div class="row">
                  	<div class="input-field col s12">
-                     	<label for="titulo">Título:</label>
-                     	<input id="titulo" name="titulo" type="text" class="validate">
-                     </div>
-                 </div>
-                 <div class="row">	
-                     <div class="input-field col s12">
-                         <label for="descricao">Descrição:</label>
-                         <input id="descricao" name="descricao" type="text" class="validate">
+                     	<label for="texto">Texto:</label>
+                     	<input id="texto" name="texto" type="text" class="validate">
                      </div>
                  </div>
              </div>
@@ -72,28 +82,6 @@
              </div>
          </div>
      </form>
-   </div>
-   
-   <div class="row">
-	   <label>Foruns:</label>
-	   <table border="1">
-	   		<thead>
-	   			<tr>
-	   				<th>Título</th>
-	   				<th>Descrição</th>
-	   				<th>Opções</th>
-	   			</tr>
-	   		</thead>
-	   		<tbody>
-   			   	<c:forEach var="forum" items="${comunidade.foruns}">
-   			   	<tr>
-			   		<td>${forum.titulo}</td>
-			   		<td>${forum.descricao}</td>
-			   		<td><a href="<c:url value="/verForum/${comunidade.id}/${forum.forumId}"/>">Ver</a></td>
-			   	</tr>
-			   	</c:forEach>
-	   		</tbody>
-	   </table>
    </div>
    
 </body>

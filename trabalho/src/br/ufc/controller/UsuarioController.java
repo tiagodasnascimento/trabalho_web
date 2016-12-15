@@ -53,8 +53,10 @@ public class UsuarioController {
 
 		if(image!=null){
 			String path = context.getRealPath("/");
-			path+="resources/images/"+usuario.getLogin()+".png";
+			String relativePath = "resources/images/"+usuario.getLogin()+".png";
+ 			path+= relativePath;
 			AulaFileUtil.saveFile(path, image);
+			usuario.setFotoPerfil(relativePath);
 		}
 
 		usuarioDAO.inserir(usuario);

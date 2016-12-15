@@ -1,6 +1,8 @@
 package br.ufc.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.swing.event.ListSelectionEvent;
 
 @Entity(name="COMUNIDADE")
 public class Comunidade {
@@ -45,7 +48,7 @@ public class Comunidade {
 	
 	/*ONE_TO_MANY*/
 	@OneToMany(mappedBy="comunidade", targetEntity=Forum.class, fetch=FetchType.EAGER)//tipo de busca
-	private Collection<Forum> foruns;
+	private List<Forum> foruns;
 	/*ONE_TO_MANY*/
 	
 	public Long getId() {
@@ -89,10 +92,13 @@ public class Comunidade {
 		this.usuarios.add(usuario);
 	}
 	
-	public Collection<Forum> getForuns() {
+	public List<Forum> getForuns() {
+		ArrayList<Forum> foruns = new ArrayList<Forum>();
+		foruns.addAll(this.foruns);
+		Collections.reverse(foruns);
 		return foruns;
 	}
-	public void setForuns(Collection<Forum> foruns) {
+	public void setForuns(List<Forum> foruns) {
 		this.foruns = foruns;
 	}
 	
