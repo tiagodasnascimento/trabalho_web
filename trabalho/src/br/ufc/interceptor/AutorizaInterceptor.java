@@ -14,7 +14,7 @@ public class AutorizaInterceptor extends HandlerInterceptorAdapter{
 		
 		String uri = request.getRequestURI();
 		
-		if(uri.endsWith("loginFormulario") ||
+		if(uri.endsWith("login") ||
 				uri.endsWith("login")){
 			return true;
 		}
@@ -23,7 +23,7 @@ public class AutorizaInterceptor extends HandlerInterceptorAdapter{
 			return true;
 		}
 		
-		response.sendRedirect("loginFormulario");
+		response.sendRedirect("login");
 		return false;
 	}
 }

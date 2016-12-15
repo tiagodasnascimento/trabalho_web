@@ -1,5 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,13 +37,12 @@
         <!-- Grey navigation panel -->
 		
 		<table border="1">
-			<c:forEach var="usuario" items="${usuario_logado}">
 				<tr>
-					<td><img width="50" height="50" src='<c:url value="WebContent/resources/images/${usuario_logado.login}.png" />' /> </td>
+					<td><img width="50" height="50" src='<c:url value="/resources/images/${usuario_logado.login}.png" />' /> </td>
 					<td><p class="flow-text">Bem-vindo, ${usuario_logado.nome}!</p></td>
 				</tr>
-			</c:forEach>	
         </table>
+        
         
 		<ul class="collection">
 		    <li class="collection-item avatar">
@@ -54,7 +55,7 @@
 		      <i class="material-icons circle green">group_work</i>
 		      <span class="title">Comunidades</span>
 		      <p>Community</p>
-		      <a href="#!" class="secondary-content"><i class="material-icons">play_arrow</i></a>
+		      <a href="listarComunidade" class="secondary-content"><i class="material-icons">play_arrow</i></a>
 		    </li>
 		    <li class="collection-item avatar">
 		      <i class="material-icons circle red">play_arrow</i>
@@ -95,8 +96,6 @@
   </div>
  </div>
  -->            
-
-<a href="inserirAmizadeFormulario">AMIZADE</a>
 
 	
 

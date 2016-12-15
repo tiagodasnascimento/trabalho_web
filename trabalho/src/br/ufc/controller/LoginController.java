@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.ufc.dao.IUsuarioDAO;
 import br.ufc.model.Usuario;
@@ -19,12 +20,15 @@ public class LoginController {
 	@Qualifier(value="usuarioDAOHib")
 	private IUsuarioDAO usuarioDAO;
 	
-	@RequestMapping("/loginFormulario")
-	public String loginFormulario(){
+	@RequestMapping(value="/login", method={RequestMethod.GET})
+	public String loginFormulario(HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			return "redirect:menu";
+		}
 		return "login_formulario";
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping(value="/login", method={RequestMethod.POST})
 	public String login(Usuario usuario, HttpSession session){
 		Usuario u = usuarioDAO.recuperar(usuario.getLogin());
 		if(u!=null){
@@ -34,12 +38,12 @@ public class LoginController {
 			}
 		}
 		
-		return "redirect:loginFormulario";
+		return "redirect:login";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect:loginFormulario";
+		return "redirect:login";
 	}
 }

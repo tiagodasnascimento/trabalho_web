@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +28,12 @@ public class Comunidade {
 	@Column(name="NOME")
 	private String nome;
 	
+	@Column(name="IMAGEM")
+	private String imagem;
+	
+	@Enumerated(EnumType.STRING)
+	private CategoriaEnum categoria;
+	
 	/*MANY_TO_MANY*/
 	@ManyToMany
 	@JoinTable(name="USUARIO_COMUNIDADE",
@@ -40,12 +48,6 @@ public class Comunidade {
 	private Collection<Forum> foruns;
 	/*ONE_TO_MANY*/
 	
-	/*MANY_TO_ONE*/
-	@ManyToOne(optional=false)
-	@JoinColumn(name="CATEGORIA_ID", referencedColumnName="CATEGORIA_ID")//referencia a chave primária
-	private Categoria categoria;
-	/*MANY_TO_ONE*/
-	
 	public Long getId() {
 		return comunidadeId;
 	}
@@ -58,7 +60,36 @@ public class Comunidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+	public Long getComunidadeId() {
+		return comunidadeId;
+	}
+	public void setComunidadeId(Long comunidadeId) {
+		this.comunidadeId = comunidadeId;
+	}
+	public CategoriaEnum getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(CategoriaEnum categoria) {
+		this.categoria = categoria;
+	}
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	public Collection<Forum> getForuns() {
+		return foruns;
+	}
+	public void setForuns(Collection<Forum> foruns) {
+		this.foruns = foruns;
+	}
 	
 	
-
 }

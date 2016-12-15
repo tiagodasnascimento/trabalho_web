@@ -26,7 +26,7 @@
     <div class="container">
       <a href="#" class="brand-logo">Orkut</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="loginFormulario">Login</a></li>
+        <li><a href="login">Login</a></li>
 	    <li><a href="inserirUsuarioFormulario">Cadastre-se</a></li>
       </ul>
     </div>
@@ -40,7 +40,7 @@
                 <form action="inserirUsuario" method="post" enctype="multipart/form-data">
                     <div class="card white darken-1">
                         <div class="card-content black-text">
-                            <center><span class="card-title blue-text text-darken-4">Infome seus dados</span></center>
+                            <center><span class="card-title blue-text text-darken-4">Informe seus dados</span></center>
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input id="nome" name="nome" type="text" class="validate">

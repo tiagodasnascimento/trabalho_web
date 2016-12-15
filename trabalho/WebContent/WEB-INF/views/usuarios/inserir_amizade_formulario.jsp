@@ -40,6 +40,7 @@
 <form action="inserirAmizade" method="post">
 	<table border="1">
 		<c:forEach var="u" items="${potenciais_amigos}">
+			<c:if test="${usuario.id != u.id}">
 			<tr>
 				<td>${u.id}</td>
 				<td>${u.nome}</td>
@@ -48,6 +49,7 @@
 				<td><form:checkbox path="amizade.amigos" value="${u.id}" /></td>
 				
 			</tr>
+			</c:if>
 		</c:forEach>	
 	</table>
 	<input type="submit" value="OK">

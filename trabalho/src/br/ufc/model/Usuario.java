@@ -1,5 +1,9 @@
 package br.ufc.model;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.sun.xml.internal.bind.api.impl.NameConverter.Standard;
 
 @Entity(name="USUARIO")
 public class Usuario {
@@ -78,7 +84,17 @@ public class Usuario {
 		return senha;
 	}
 	public void setSenha(String senha) {
-		this.senha = senha;
+		System.out.println(senha);
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		md.update(senha.getBytes(StandardCharsets.UTF_8));
+		this.senha = String.format("%064x", new BigInteger(1, md.digest()));
+		System.out.println(this.senha);
 	}
 	
 	public String getSobrenome() {

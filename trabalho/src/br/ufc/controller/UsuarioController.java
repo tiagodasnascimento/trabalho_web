@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.ufc.dao.IAmizadeDAO;
+import br.ufc.dao.IComunidadeDAO;
 import br.ufc.dao.IUsuarioDAO;
 import br.ufc.form.AmizadeCheckboxForm;
 import br.ufc.model.Amizade;
+import br.ufc.model.Comunidade;
 import br.ufc.model.Usuario;
 import br.ufc.util.AulaFileUtil;
 
@@ -29,6 +31,7 @@ public class UsuarioController {
 	@Autowired
 	@Qualifier(value="usuarioDAOHib")
 	private IUsuarioDAO usuarioDAO;
+	
 	
 	@Autowired
 	@Qualifier(value="amizadeDAOHib")//nome que tá no spring
@@ -42,6 +45,7 @@ public class UsuarioController {
 	public String inserirUsuarioFormulario(){//link para o formulário
 		return "usuarios/inserir_usuario_formulario";
 	}
+	
 	
 	@RequestMapping("/inserirUsuario")
 	public String inserirUsuario(Usuario usuario, 
@@ -75,6 +79,7 @@ public class UsuarioController {
 		Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
 		List<Usuario> potenciaisAmigos = usuarioDAO.listar();
 		potenciaisAmigos.remove(usuario);
+		System.out.println(usuario.toString());
 		
 		AmizadeCheckboxForm acf = new AmizadeCheckboxForm();
 		List<Amizade> minhasAmizades = this.amizadeDAO.listarAmizadesDeId(usuario.getId());
@@ -85,11 +90,13 @@ public class UsuarioController {
 				Long amigoId = amizade.getUsuarioAlvo().getId();
 				Usuario amigoTemp = new Usuario();
 				amigoTemp.setId(amigoId);
-				potenciaisAmigos.remove(amigoTemp);
+				potenciaisAmigos.remove(amizade.getUsuarioAlvo());
+				
 				
 				//vetorIds[i] = amigoId;
 				//i++;
 			}
+			
 			//acf.setAmigos(vetorIds);
 		}
 		
@@ -114,7 +121,8 @@ public class UsuarioController {
 			
 		}
 		
-		return "redirect:listarUsuario";
+		return "redirect:inserirAmizadeFormulario";
 		
 	}
+
 }
