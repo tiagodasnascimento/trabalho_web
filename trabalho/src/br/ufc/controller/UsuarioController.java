@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,6 +42,13 @@ public class UsuarioController {
 	@Autowired
 	private ServletContext context;
 	
+	@RequestMapping("/perfil/{idUsuario}")
+	public String perfil(Model model, @PathVariable(value="idUsuario") Long idUsuario){
+		Usuario usuario = usuarioDAO.recuperar(idUsuario);
+		model.addAttribute("usuario", usuario);
+		return "usuarios/perfil";
+	}
+	
 	@RequestMapping("/inserirUsuarioFormulario")
 	public String inserirUsuarioFormulario(){//link para o formulário
 		return "usuarios/inserir_usuario_formulario";
@@ -60,7 +68,7 @@ public class UsuarioController {
 		}
 
 		usuarioDAO.inserir(usuario);
-		return "usuarios/inserir_ok";
+		return "login_formulario";
 	}
 	
 	//LISTAR
@@ -72,8 +80,16 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/menu")
-	public String Menu(){//link para o formulário
+	public String Menu(Model model, HttpSession session){//link para o formulário
 		return "menu";
+	}
+	
+	@RequestMapping("/listarAmigos")
+	public String listarAmigos(Model model, HttpSession session){
+		Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+		List<Amizade> amigos =  amizadeDAO.listarAmizadesDeId(usuario.getId());
+		model.addAttribute("amigos", amigos);
+		return "usuarios/listar_amigos";
 	}
 	
 	@RequestMapping("/inserirAmizadeFormulario")

@@ -20,9 +20,9 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 	
 	 	  
-	<!-- <mvc:interceptors>
+	 <mvc:interceptors>
 		<bean class="br.ufc.interceptor.AutorizaInterceptor"/>
-	</mvc:interceptors> -->
+	</mvc:interceptors> 
 	
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />

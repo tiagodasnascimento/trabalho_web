@@ -30,10 +30,11 @@
       </ul>
     </div>
 </nav>
-   <h1>${comunidade.nome}</h1>
+   <h5>${comunidade.nome}</h5>
    <c:choose>
    		<c:when test="${participando == true}">
-   			<h3>Você está participando desta Comunidade</h3>
+   			<h6>Você está participando desta Comunidade</h6>
+   			<br>
    		</c:when>
    		<c:when test="${participando == false}">
    			<a href="<c:url value="/participarComunidade/${comunidade.id}" />">Participar</a>
@@ -41,7 +42,7 @@
    </c:choose>
    
    <div class="row">
-	   <label>Participantes:</label>
+	   <label><h5>Participantes:</h5></label>
 	   <ul>
 	   	<c:forEach var="usuario" items="${comunidade.usuarios}">
 	   		<li>${usuario.nome}</li>
@@ -49,34 +50,34 @@
 	   </ul>
    </div>
    
-   <div class="row">
-   <h2>Novo Forum</h2>
-    <form action='<c:url value="/adicionarForum/${comunidade.id}"></c:url>' method="post" enctype="multipart/form-data">
-         <div class="card white darken-1">
-             <div class="card-content black-text">
-                 <div class="row">
-                 	<div class="input-field col s12">
-                     	<label for="titulo">Título:</label>
-                     	<input id="titulo" name="titulo" type="text" class="validate">
-                     </div>
-                 </div>
-                 <div class="row">	
-                     <div class="input-field col s12">
-                         <label for="descricao">Descrição:</label>
-                         <input id="descricao" name="descricao" type="text" class="validate">
-                     </div>
-                 </div>
-             </div>
-             <div class="card-action right-align">
-                 <button class="waves-effect waves-red btn indigo darken-4"><i class="material-icons left"></i>Enviar</button>
-             </div>
-         </div>
-     </form>
-   </div>
-   
-   <div class="row">
-	   <label>Foruns:</label>
-	   <table border="1">
+<div class="row">
+<h5>Novo Forum</h5>
+	<div class="col s6">
+		<form action='<c:url value="/adicionarForum/${comunidade.id}"></c:url>' method="post" enctype="multipart/form-data">
+	    	<div class="card white darken-1">
+	             <div class="card-content black-text">
+	                 <div class="row">
+	                 	<div class="input-field col s12">
+	                     	<label for="titulo">Título:</label>
+	                     	<input id="titulo" name="titulo" type="text" class="validate">
+	                     </div>
+	                 </div>
+	                 <div class="row">	
+	                     <div class="input-field col s12">
+	                         <label for="descricao">Descrição:</label>
+	                         <input id="descricao" name="descricao" type="text" class="validate">
+	                     </div>
+	                 </div>
+	             </div>
+	             <div class="card-action right-align">
+	                 <button class="waves-effect waves-red btn indigo darken-4"><i class="material-icons left"></i>Enviar</button>
+	             </div>
+	         </div>
+	     </form>
+	</div>
+	<div class="col s6">
+		<h5>Fóruns</h5>
+		<table border="1">
 	   		<thead>
 	   			<tr>
 	   				<th>Título</th>
@@ -95,6 +96,7 @@
 	   		</tbody>
 	   </table>
    </div>
+</div>
    
 </body>
 </html>

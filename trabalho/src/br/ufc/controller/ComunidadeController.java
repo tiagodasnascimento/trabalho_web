@@ -46,13 +46,13 @@ public class ComunidadeController {
 	@Autowired
 	private ServletContext context;
 		
-	@RequestMapping(value="/inserirComunidadeFormulario", method={RequestMethod.GET})
+	@RequestMapping(value="/inserirComunidadeFormulario", method={RequestMethod.GET})//Quando só recarrega
 	public String inserirComunidadeFormulario(Model model){//link para o formulário
 		model.addAttribute("categorias", Arrays.asList(CategoriaEnum.values()));
 		return "comunidades/inserir_comunidade_formulario";
 	}
 	
-	@RequestMapping(value="/inserirComunidade", method={RequestMethod.POST})
+	@RequestMapping(value="/inserirComunidade", method={RequestMethod.POST})//inserir dados
 	public String inserirComunidade(Comunidade comunidade, 
 			@RequestParam(value="image", required=false)MultipartFile image){
 
@@ -91,7 +91,7 @@ public class ComunidadeController {
 		Comunidade comunidade = comunidadeDAO.recuperar(idComunidade);
 		Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
 		comunidade.addUsuario(usuario);
-		comunidadeDAO.alterar(comunidade);
+		comunidadeDAO.alterar(comunidade);//altera a lista
 		model.addAttribute("comunidade", comunidade);
 		return "redirect:/verComunidade/" + comunidade.getId();
 	}

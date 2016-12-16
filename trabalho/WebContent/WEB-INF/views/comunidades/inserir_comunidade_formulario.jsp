@@ -8,16 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Inserir Comunidade</title>
 
-    <!--  Import Google Icon Font-->
+ 
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- Import materialize.css -->
+	
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-	<!-- Compiled and minified CSS -->
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>          
-	<!-- Compiled and minified JavaScript -->
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
  
 </head>
@@ -50,8 +50,9 @@
                             	<div class="input-field col s12">
                             		<div>
                                 		<label for="categoria">Categoria:</label>
+                                		<br>
                                 		<div class="input-field col s12">
-										    <select name="categoria">
+										    <select class="browser-default" name="categoria">
 											    <c:forEach items="${categorias}" var="categoria">
 											    	<option value="${categoria}">${categoria}</option>
 											     </c:forEach>

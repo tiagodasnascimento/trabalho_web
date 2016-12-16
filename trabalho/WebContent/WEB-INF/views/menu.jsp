@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Menu</title>
 
-	 <!-- Import Google Icon Font-->
+    <!-- Import Google Icon Font-->
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
@@ -17,9 +17,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>          
-	Compiled and minified JavaScript
+	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script> 
-
+	
 </head>
 <body>
 <nav class="indigo darken-4">
@@ -38,13 +38,19 @@
 		
 		<table border="1">
 				<tr>
-					<td><img width="50" height="50" src='<c:url value="${usuario_logado.fotoPerfil}" />' /> </td>
+					<td><img width="70" height="70" src='<c:url value="${usuario_logado.fotoPerfil}" />' /> </td>
 					<td><p class="flow-text">Bem-vindo, ${usuario_logado.nome}!</p></td>
 				</tr>
         </table>
         
         
 		<ul class="collection">
+		    <li class="collection-item avatar">
+		      <i class="material-icons circle">perm_identity</i>
+		      <span class="title">Meus amigos</span>
+		      <p>My friends</p>
+		      <a href="listarAmigos" class="secondary-content"><i class="material-icons">play_arrow</i></a>
+		    </li>
 		    <li class="collection-item avatar">
 		      <i class="material-icons circle">perm_identity</i>
 		      <span class="title">Buscar amigos</span>
@@ -57,14 +63,7 @@
 		      <p>Community</p>
 		      <a href="listarComunidade" class="secondary-content"><i class="material-icons">play_arrow</i></a>
 		    </li>
-		    <li class="collection-item avatar">
-		      <i class="material-icons circle red">play_arrow</i>
-		      <span class="title">Title</span>
-		      <p>First Line <br>
-		         Second Line
-		      </p>
-		      <a href="#!" class="secondary-content"><i class="material-icons">play_arrow</i></a>
-		    </li>
+		    
 		</ul>
             
           
@@ -73,6 +72,17 @@
       </div>
 
       <div class="col s9">
+      
+      	<table border="1">
+		<c:forEach var="u" items="${amigos}">
+			<tr>
+				<td>${u.id}</td>
+				<td>${u.nome}</td>
+				
+						
+			</tr>
+		</c:forEach>	
+	</table>
         <!-- Teal page content  -->
        <!--  <a href="listarUsuario">Listar usuarios</a><br /> -->
       </div>

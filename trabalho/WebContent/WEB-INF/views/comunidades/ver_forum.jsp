@@ -7,7 +7,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Listar Comunidade</title>
+<title>Listar Forum</title>
 
 	 <!-- Import Google Icon Font-->
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,17 +32,20 @@
       </ul>
     </div>
 </nav>
-   <h1>${forum.titulo}</h1>
+  <center> 
+   <h2>${forum.titulo}</h2>
    <h3>${forum.descricao}</h3>
-   
-   
-   <div class="row">
-	   <label>Mensagens:</label>
+  </center>
+ 
+ <div class="row">
+ 
+	<div class="row">
+	   <label><h5>Mensagens:</h5></label>
 	   <table border="1">
 	   		<thead>
 	   			<tr>
 	   				<th>Foto</th>
-	   				<th>Título</th>
+	   				<th>Mensagem</th>
 	   			</tr>
 	   		</thead>
 	   		<tbody>
@@ -51,11 +54,11 @@
    			   		<td>
    			   			<div>
    			   				<center>
-	   			   			<img src='<c:url value="/${mensagem.usuario.fotoPerfil}"></c:url>' width="100"  />
+	   			   			<img src='<c:url value="/${mensagem.usuario.fotoPerfil}"></c:url>' width="50"  />
 	   			   			</center>
    			   			</div>
    			   			<div>
-   			   				<label>${mensagem.usuario.nome} ${mensagem.usuario.sobrenome}</label>
+   			   				<a href='<c:url value="/perfil/${mensagem.usuario.id}"></c:url>'>${mensagem.usuario.nome} ${mensagem.usuario.sobrenome}</a>
    			   			</div>
    			   		</td>
 			   		<td>${mensagem.texto}</td>
@@ -66,7 +69,7 @@
    </div>
    
    <div class="row">
-   <h2>Nova Mensagem</h2>
+   <h5>Nova Mensagem</h5>
     <form action='<c:url value="/adicionarMensagem/${comunidade.id}/${forum.forumId}"></c:url>' method="post" enctype="multipart/form-data">
          <div class="card white darken-1">
              <div class="card-content black-text">
@@ -83,6 +86,6 @@
          </div>
      </form>
    </div>
-   
+</div>   
 </body>
 </html>

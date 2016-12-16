@@ -63,6 +63,7 @@ public class Forum {
 	public void setComunidade(Comunidade comunidade) {
 		this.comunidade = comunidade;
 	}
+
 	public List<Mensagem> getMensagens() {
 		return mensagens;
 	}
