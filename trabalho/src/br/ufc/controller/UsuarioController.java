@@ -1,5 +1,6 @@
 package br.ufc.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -101,27 +102,11 @@ public class UsuarioController {
 		Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
 		List<Usuario> potenciaisAmigos = usuarioDAO.listar();
 		potenciaisAmigos.remove(usuario);
-		System.out.println(usuario.toString());
-		
 		AmizadeCheckboxForm acf = new AmizadeCheckboxForm();
 		List<Amizade> minhasAmizades = this.amizadeDAO.listarAmizadesDeId(usuario.getId());
-		if(minhasAmizades!=null && minhasAmizades.size()>0){
-			//Long[] vetorIds = new Long[minhasAmizades.size()];
-			//int i = 0;
-			for(Amizade amizade:minhasAmizades){
-				Long amigoId = amizade.getUsuarioAlvo().getId();
-				Usuario amigoTemp = new Usuario();
-				amigoTemp.setId(amigoId);
-				
-				potenciaisAmigos.remove(amigoTemp);
-				
-				//vetorIds[i] = amigoId;
-				//i++;
-			}
-		
-			//acf.setAmigos(vetorIds);
+		for(Amizade amizade: minhasAmizades){
+			potenciaisAmigos.remove(amizade.getUsuarioAlvo());
 		}
-		
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("potenciais_amigos", potenciaisAmigos);
 		model.addAttribute("amizade", acf);
@@ -146,5 +131,26 @@ public class UsuarioController {
 		return "redirect:inserirAmizadeFormulario";
 				
 	}
+	
 
+	//ALTERAR
+	@RequestMapping("/alterarUsuarioFormulario")
+	public String alterarUsuarioFormulario(Long id, Model model){
+		Usuario u = usuarioDAO.recuperar(id);
+		model.addAttribute("usuario", u);
+		return "usuarios/alterar_usuario_formulario";
+	}
+	
+	@RequestMapping("/alterarUsuario")
+	public String alterarUsuario(Usuario usuario, @RequestParam(value="image", required=false) MultipartFile image){
+		if(image!=null){
+			String path = context.getRealPath("/");
+			String relativePath = "resources/images/"+usuario.getLogin()+".png";
+ 			path+= relativePath;
+			AulaFileUtil.saveFile(path, image);
+			usuario.setFotoPerfil(relativePath);
+		}
+		usuarioDAO.alterar(usuario);
+		return "redirect:menu";
+	}
 }

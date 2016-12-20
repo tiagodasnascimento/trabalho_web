@@ -122,5 +122,21 @@ public class Usuario {
 	public void setFotoPerfil(String fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
+	
+	@Override
+    public boolean equals(Object object) {
+        if (object instanceof Usuario) {
+            Usuario usuario = (Usuario) object;
+            return usuario.getId() == this.getId();
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = (int) (53 * hash + this.getId());
+        return hash;
+    }
 
 }

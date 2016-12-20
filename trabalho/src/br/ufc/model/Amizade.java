@@ -49,6 +49,22 @@ public class Amizade {
 		this.usuarioAlvo = usuarioAlvo;
 	}
 	
+	@Override
+    public boolean equals(Object object) {
+        if (object instanceof Amizade) {
+            Amizade amizade = (Amizade) object;
+            return amizade.getId() == this.getId();
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = (int) (53 * hash + this.getId());
+        return hash;
+    }
+	
 	
 
 }

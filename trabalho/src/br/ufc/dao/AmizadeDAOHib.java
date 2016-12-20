@@ -33,7 +33,6 @@ public class AmizadeDAOHib implements IAmizadeDAO {
 		return query.getResultList();
 	}
 	
-
 	@Override
 	public boolean existeAmizade(Amizade amizade){
 		String hql = "select a from AMIZADE as a "

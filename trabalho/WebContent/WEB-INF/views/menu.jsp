@@ -40,8 +40,9 @@
 		
 		<table border="1">
 				<tr>
-					<td><img width="70" height="70" src='<c:url value="${usuario_logado.fotoPerfil}" />' /> </td>
+					<td><img width="70" src='<c:url value="${usuario_logado.fotoPerfil}" />' /> </td>
 					<td><p class="flow-text">Bem-vindo, ${usuario_logado.nome}!</p></td>
+					<td><a href="alterarUsuarioFormulario?id=${usuario_logado.id}">Alterar Usuário</a></td>
 				</tr>
         </table>
         
