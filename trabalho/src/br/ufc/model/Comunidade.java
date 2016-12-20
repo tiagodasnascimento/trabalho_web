@@ -3,6 +3,7 @@ package br.ufc.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,9 +35,6 @@ public class Comunidade {
 	@Column(name="IMAGEM")
 	private String imagem;
 	
-	@Enumerated(EnumType.STRING)
-	private CategoriaEnum categoria;
-	
 	/*MANY_TO_MANY*/
 	@ManyToMany
 	@JoinTable(name="USUARIO_COMUNIDADE",
@@ -51,6 +49,9 @@ public class Comunidade {
 	private List<Forum> foruns;
 	/*ONE_TO_MANY*/
 	
+	private String categoria;
+	/*MANY_TO_ONE*/
+	
 	public Long getId() {
 		return comunidadeId;
 	}
@@ -63,6 +64,7 @@ public class Comunidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public String getImagem() {
 		return imagem;
 	}
@@ -75,12 +77,7 @@ public class Comunidade {
 	public void setComunidadeId(Long comunidadeId) {
 		this.comunidadeId = comunidadeId;
 	}
-	public CategoriaEnum getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(CategoriaEnum categoria) {
-		this.categoria = categoria;
-	}
+	
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -104,6 +101,12 @@ public class Comunidade {
 	
 	public void addForum(Forum forum) {
 		this.foruns.add(forum);
+	}
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 	
 	

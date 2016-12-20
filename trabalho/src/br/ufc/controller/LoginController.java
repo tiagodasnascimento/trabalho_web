@@ -20,7 +20,7 @@ public class LoginController {
 	@Qualifier(value="usuarioDAOHib")
 	private IUsuarioDAO usuarioDAO;
 	
-	@RequestMapping(value="/login", method={RequestMethod.GET})
+	@RequestMapping(value="/loginFormulario", method={RequestMethod.GET})
 	public String loginFormulario(HttpSession session){
 		if(session.getAttribute("usuario_logado") != null){
 			return "redirect:menu";
@@ -28,7 +28,12 @@ public class LoginController {
 		return "login_formulario";
 	}
 	
-	@RequestMapping(value="/login", method={RequestMethod.POST})
+	@RequestMapping(value="/loginFormulario", method={RequestMethod.POST})
+	public String loginFormulario(){
+		return "login_formulario";
+	}
+	
+	@RequestMapping("/login")
 	public String login(Usuario usuario, HttpSession session){
 		Usuario u = usuarioDAO.recuperar(usuario.getLogin());
 		if(u!=null){
@@ -38,12 +43,12 @@ public class LoginController {
 			}
 		}
 		
-		return "redirect:login";
+		return "redirect:loginFormulario";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect:login";
+		return "redirect:loginFormulario";
 	}
 }

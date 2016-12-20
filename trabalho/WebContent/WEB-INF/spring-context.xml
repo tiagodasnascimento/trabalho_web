@@ -18,12 +18,9 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<context:component-scan base-package="br.ufc.controller" />
 	<mvc:annotation-driven />
 	
-	
-	 	  
-	 <mvc:interceptors>
+	<mvc:interceptors>
 		<bean class="br.ufc.interceptor.AutorizaInterceptor"/>
-	</mvc:interceptors> 
-	
+	</mvc:interceptors>
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
@@ -32,14 +29,12 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<property name="maxUploadSize" value="50000000" />
 	</bean>
 	
-	
-	
 	<bean id="usuarioDAOHib" class="br.ufc.dao.UsuarioDAOHib"/>
 	<bean id="comunidadeDAOHib" class="br.ufc.dao.ComunidadeDAOHib"/>
 	<bean id="amizadeDAOHib" class="br.ufc.dao.AmizadeDAOHib"/>
 	<bean id="forumDAOHib" class="br.ufc.dao.ForumDAOHib"/>
 	<bean id="mensagemDAOHib" class="br.ufc.dao.MensagemDAOHib"/>
-	
+		
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost/java_web_trabalho" />

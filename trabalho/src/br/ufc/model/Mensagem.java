@@ -35,6 +35,7 @@ public class Mensagem {
 	public Long getMensagemId() {
 		return mensagemId;
 	}
+
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -47,6 +48,7 @@ public class Mensagem {
 	public void setForum(Forum forum) {
 		this.forum = forum;
 	}
+
 	public void setMensagemId(Long mensagemId) {
 		this.mensagemId = mensagemId;
 	}

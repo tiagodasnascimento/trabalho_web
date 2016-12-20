@@ -35,9 +35,7 @@ public class Forum {
 	/*ONE_TO_MANY*/
 	@OneToMany(mappedBy="forum", targetEntity=Mensagem.class, fetch=FetchType.EAGER)//tipo de busca
 	private List<Mensagem> mensagens;
-	/*ONE_TO_MANY*/
-	
-	
+		
 	
 	public Long getForumId() {
 		return forumId;
@@ -51,6 +49,7 @@ public class Forum {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -73,5 +72,4 @@ public class Forum {
 	public void addMensagen(Mensagem mensagem) {
 		this.mensagens.add(mensagem);
 	}
-	
 }

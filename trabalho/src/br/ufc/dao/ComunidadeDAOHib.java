@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.ufc.model.Comunidade;
+import br.ufc.model.Usuario;
 
 public class ComunidadeDAOHib implements IComunidadeDAO{
 

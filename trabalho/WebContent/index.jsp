@@ -25,7 +25,7 @@
     <div class="container">
       <a href="#" class="brand-logo">Orkut</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="login">Login</a></li>
+        <li><a href="loginFormulario">Login</a></li>
 	    <li><a href="inserirUsuarioFormulario">Cadastre-se</a></li>
       </ul>
     </div>

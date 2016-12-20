@@ -1,5 +1,6 @@
 package br.ufc.model;
 
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -100,7 +101,6 @@ public class Usuario {
 		}
 		md.update(senha.getBytes(StandardCharsets.UTF_8));
 		this.senha = String.format("%064x", new BigInteger(1, md.digest()));
-		System.out.println(this.senha);
 	}
 	
 	public String getSobrenome() {
