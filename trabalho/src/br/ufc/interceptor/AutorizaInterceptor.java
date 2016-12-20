@@ -15,7 +15,7 @@ public class AutorizaInterceptor extends HandlerInterceptorAdapter{
 		String uri = request.getRequestURI();
 		
 		if(uri.endsWith("loginFormulario") ||
-			uri.endsWith("login")){
+			uri.endsWith("login") || uri.endsWith("inserirUsuarioFormulario") || uri.endsWith("inserirUsuario")) {
 			return true;
 		}
 	
